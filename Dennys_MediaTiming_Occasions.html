@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Denny's — Media Timing & Creative Starters</title>
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #141414;
+    --border: #222;
+    --divider: #1e1e1e;
+    --text-primary: #F5F5F5;
+    --text-secondary: #bbb;
+    --text-muted: #666;
+    --accent-orange: #FF3C00;
+    --accent-yellow: #FFD600;
+    --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: var(--font);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #080808;
+    border-bottom: 1px solid var(--border);
+    padding: 0 48px;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .nav-inner {
+    display: inline-flex;
+    gap: 0;
+    min-width: 100%;
+  }
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 24px 14px 0;
+    border-right: 1px solid var(--border);
+    margin-right: 16px;
+  }
+  .nav-brand-name {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-orange);
+  }
+  .nav-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 20px;
+    text-decoration: none;
+    color: var(--text-muted);
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    font-size: 12px;
+  }
+  .nav-item:hover { color: var(--text-primary); border-bottom-color: var(--accent-orange); }
+  .nav-num {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--accent-orange);
+    letter-spacing: 0.1em;
+  }
+  .nav-name { font-weight: 600; color: inherit; }
+  .nav-time { font-size: 10px; color: var(--text-muted); }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--bg);
+    border-bottom: 3px solid var(--accent-orange);
+    padding: 60px 48px 48px;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent-orange);
+    margin-bottom: 16px;
+  }
+  .hero-title {
+    font-size: clamp(36px, 5vw, 72px);
+    font-weight: 900;
+    line-height: 1.0;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+  }
+  .hero-subtitle {
+    font-size: 16px;
+    color: #888;
+    font-style: italic;
+    margin-bottom: 36px;
+    max-width: 700px;
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .hero-badge {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+  .hero-badge.orange { background: var(--accent-orange); color: #fff; border-color: var(--accent-orange); }
+  .hero-badge.yellow { background: var(--accent-yellow); color: #0a0a0a; border-color: var(--accent-yellow); }
+
+  /* ── OCCASION SECTION ── */
+  .occasion-section { padding: 0; }
+  .occ-container { max-width: 1100px; margin: 0 auto; padding: 64px 48px; }
+
+  .occ-header { margin-bottom: 48px; }
+  .occ-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+  .occ-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .occ-time {
+    font-size: 12px;
+    color: var(--text-muted);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 3px 10px;
+    border-radius: 12px;
+  }
+  .occ-title {
+    font-size: clamp(32px, 4vw, 56px);
+    font-weight: 900;
+    line-height: 1.05;
+    margin-bottom: 16px;
+  }
+  .occ-accent-bar { height: 3px; width: 80px; border-radius: 2px; }
+
+  /* ── SECTION BLOCKS ── */
+  .section-block { margin-bottom: 48px; }
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--divider);
+  }
+
+  /* ── PROOF CARDS ── */
+  .proof-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .proof-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 24px;
+  }
+  .proof-stat {
+    font-size: clamp(16px, 2vw, 22px);
+    font-weight: 900;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+  .proof-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent-yellow);
+    margin-bottom: 10px;
+  }
+  .proof-note {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* ── AUDIENCE LIST ── */
+  .audience-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .audience-list li {
+    font-size: 14px;
+    color: var(--text-secondary);
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.6;
+  }
+  .audience-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent-orange);
+  }
+
+  /* ── CHANNEL TABLE ── */
+  .ch-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .ch-table thead tr {
+    border-bottom: 1px solid var(--border);
+  }
+  .ch-table th {
+    text-align: left;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 8px 12px 8px 0;
+  }
+  .ch-table td {
+    padding: 14px 12px 14px 0;
+    vertical-align: top;
+    border-bottom: 1px solid var(--divider);
+    line-height: 1.5;
+  }
+  .ch-channel {
+    font-weight: 700;
+    color: var(--text-primary);
+    width: 22%;
+    white-space: nowrap;
+  }
+  .ch-timing {
+    color: var(--accent-yellow);
+    font-weight: 600;
+    width: 22%;
+    white-space: nowrap;
+  }
+  .ch-rationale { color: var(--text-muted); width: 56%; }
+
+  /* ── CREATIVE CARDS ── */
+  .creative-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .creative-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .creative-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-orange), var(--accent-yellow));
+  }
+  .creative-num {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .creative-territory {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-yellow);
+    margin-bottom: 14px;
+  }
+  .creative-headline {
+    font-size: clamp(16px, 2vw, 20px);
+    font-weight: 900;
+    color: var(--text-primary);
+    line-height: 1.25;
+    margin-bottom: 8px;
+    font-style: italic;
+  }
+  .creative-subhead {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+  .creative-rationale {
+    font-size: 12px;
+    color: #777;
+    line-height: 1.6;
+    border-top: 1px solid var(--divider);
+    padding-top: 14px;
+    margin-top: 4px;
+  }
+
+  /* ── DIVIDER ── */
+  .occ-divider { border-top: 1px solid var(--divider); margin-top: 24px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #080808;
+    border-top: 1px solid var(--border);
+    padding: 36px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-note {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-style: italic;
+    max-width: 500px;
+  }
+  .footer-badges { display: flex; gap: 10px; flex-wrap: wrap; }
+  .footer-badge {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    nav { padding: 0 20px; }
+    .hero, .occ-container { padding: 36px 20px; }
+    .proof-grid, .creative-grid { grid-template-columns: 1fr; }
+    .ch-table { display: block; overflow-x: auto; }
+    footer { padding: 24px 20px; flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <span class="nav-brand-name">Denny's</span>
+    </div>
+    <a href="#lunch" class="nav-item"><span class="nav-num">01</span><span class="nav-name">Lunch Rush</span><span class="nav-time">11 AM – 1 PM</span></a><a href="#afterschool" class="nav-item"><span class="nav-num">02</span><span class="nav-name">After-School Snack</span><span class="nav-time">3 PM – 5 PM</span></a><a href="#dinner" class="nav-item"><span class="nav-num">03</span><span class="nav-name">Post-Work Dinner</span><span class="nav-time">7 PM – 9 PM</span></a><a href="#evening_social" class="nav-item"><span class="nav-num">04</span><span class="nav-name">Evening Social</span><span class="nav-time">9 PM – 11 PM</span></a><a href="#latenight" class="nav-item"><span class="nav-num">05</span><span class="nav-name">Late Night</span><span class="nav-time">12 AM – 3 AM</span></a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-eyebrow">Denny's · Media & Creative Strategy</div>
+  <h1 class="hero-title">Media Timing &<br>Creative Starters</h1>
+  <p class="hero-subtitle">Five occasions. Every data proof-point. Three creative territories per window.</p>
+  <div class="hero-meta">
+    <span class="hero-badge orange">5 Occasions</span>
+    <span class="hero-badge yellow">MC Zillennials + MC Parents</span>
+    <span class="hero-badge">Transaction Data</span>
+    <span class="hero-badge">Audience Activity Heatmaps</span>
+    <span class="hero-badge">Simmons MRI</span>
+  </div>
+</header>
+
+<!-- OCCASIONS -->
+
+    <section class="occasion-section" id="lunch" style="background:#0a0a0a;">
+      <div class="occ-container">
+
+        <!-- HEADER -->
+        <div class="occ-header">
+          <div class="occ-meta">
+            <span class="occ-label">OCCASION 01</span>
+            <span class="occ-time">11 AM – 1 PM · Mon – Fri</span>
+          </div>
+          <h2 class="occ-title" style="color:#FF6B35;">Lunch Rush</h2>
+          <div class="occ-accent-bar" style="background:linear-gradient(90deg,#FF6B35,#FFD166);"></div>
+        </div>
+
+        <!-- DATA PROOF -->
+        <div class="section-block">
+          <div class="section-label">DATA PROOF-POINTS</div>
+          <div class="proof-grid">
+            
+        <div class="proof-card">
+          <div class="proof-stat">9.46% → 14.47% → 12.42%</div>
+          <div class="proof-label">Zillennial eating density</div>
+          <div class="proof-note">Eating spikes from 9.46% at 11 AM, peaks at 14.47% at noon — the single largest eating moment in the Zillennial day.</div>
+        </div>
+        <div class="proof-card">
+          <div class="proof-stat">9.4% → 14.1% → 12.8%</div>
+          <div class="proof-label">MC Parent eating density</div>
+          <div class="proof-note">MC Parents mirror the same noon peak (14.1%), confirming cross-segment alignment — both audiences converge on the same occasion simultaneously.</div>
+        </div>
+        <div class="proof-card">
+          <div class="proof-stat">Index: 114–137</div>
+          <div class="proof-label">Denny's transaction index vs. category</div>
+          <div class="proof-note">Denny's lunch index runs 14–37pts above category average — this is already a strength, but audience eating curves suggest it can be pushed further.</div>
+        </div>
+        <div class="proof-card">
+          <div class="proof-stat">~$334K–370K volume</div>
+          <div class="proof-label">Weekday transaction volume at noon</div>
+          <div class="proof-note">Weekday noon is Denny's single highest weekday slot. Tue–Thu averages 199K–214K; Mon/Fri run 10–15% higher due to bookend social lift.</div>
+        </div>
+          </div>
+        </div>
+
+        <!-- AUDIENCE SIGNALS -->
+        <div class="section-block">
+          <div class="section-label">AUDIENCE SIGNALS</div>
+          <ul class="audience-list">
+            <li>Zillennials: working at 25.19% density at noon — active in hybrid/office environments where Denny's near-workplace positioning matters</li><li>MC Parents: 24.9% working density with 5.1% socializing — a functional, grab-and-go eating occasion, not a leisurely one</li><li>Both segments have sub-5% sleep density by noon — attention is fully available; media is visible and actionable</li>
+          </ul>
+        </div>
+
+        <!-- MEDIA WINDOWS -->
+        <div class="section-block">
+          <div class="section-label">MEDIA WINDOWS</div>
+          <table class="ch-table">
+            <thead>
+              <tr>
+                <th>Channel</th>
+                <th>Window</th>
+                <th>Rationale</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+        <tr>
+          <td class="ch-channel">Social / Mobile</td>
+          <td class="ch-timing">10:30 AM – 12:30 PM</td>
+          <td class="ch-rationale">Pre-lunch decision window — catch audiences before they've committed to where to eat</td>
+        </tr>
+        <tr>
+          <td class="ch-channel">OOH / DOOH</td>
+          <td class="ch-timing">9:00 AM – 11:30 AM</td>
+          <td class="ch-rationale">Morning commute tail-end and office-arrival moment; proximity targeting near Denny's locations</td>
+        </tr>
+        <tr>
+          <td class="ch-channel">Search / Local</td>
+          <td class="ch-timing">11:00 AM – 1:00 PM</td>
+          <td class="ch-rationale">Peak intent window — 'lunch near me' queries spike; Denny's should own this keyword territory</td>
+        </tr>
+        <tr>
+          <td class="ch-channel">CTV / Streaming</td>
+          <td class="ch-timing">Not recommended</td>
+          <td class="ch-rationale">Both audiences are actively working during this window — lean-back media has low receptivity</td>
+        </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- CREATIVE STARTERS -->
+        <div class="section-block">
+          <div class="section-label">CREATIVE THOUGHT-STARTERS</div>
+          <div class="creative-grid">
+            
+        <div class="creative-card">
+          <div class="creative-num">CONCEPT 01</div>
+          <div class="creative-territory">The Productive Lunch</div>
+          <div class="creative-headline">"Your 45 minutes. Make them count."</div>
+          <div class="creative-subhead">Real food. No wait. Back before anyone noticed.</div>
+          <div class="creative-rationale">Speaks directly to the Zillennial hybrid worker who guards their lunch break fiercely. Positions Denny's as respecting your time — not a slow sit-down.</div>
+        </div>
+        <div class="creative-card">
+          <div class="creative-num">CONCEPT 02</div>
+          <div class="creative-territory">The Unspoken Lunch Order</div>
+          <div class="creative-headline">"You already know what you want."</div>
+          <div class="creative-subhead">We just happen to have it.</div>
+          <div class="creative-rationale">Targets the habitual Denny's lunch visitor — someone who returns because the menu is reliable. Confidence-forward, not explanatory.</div>
+        </div>
+        <div class="creative-card">
+          <div class="creative-num">CONCEPT 03</div>
+          <div class="creative-territory">The Midday Reset</div>
+          <div class="creative-headline">"Step away. Eat something real. Return a person."</div>
+          <div class="creative-subhead">Denny's. Open for everything that counts as lunch.</div>
+          <div class="creative-rationale">Addresses MC Parent exhaustion by mid-morning — frames Denny's as a genuine mental break, not just fuel.</div>
+        </div>
+          </div>
+        </div>
+
+        <div class="occ-divider"></div>
+
+      </div>
+    </section>
+    <section class="occasion-section" id="afterschool" style="background:#0f0f0f;">
+      <div class="occ-container">
+
+        <!-- HEADER -->
+        <div class="occ-header">
+          <div class="occ-meta">
+            <span class="occ-label">OCCASION 02</span>
+            <span class="occ-time">3 PM – 5 PM · Mon – Fri</span>
+          </div>
+          <h2 class="occ-title" style="color:#F7B731;">After-School Snack</h2>
+          <div class="occ-accent-bar" style="background:linear-gradient(90deg,#F7B731,#FC5C65);"></div>
+        </div>
+
+        <!-- DATA PROOF -->
+        <div class="section-block">
+          <div class="section-label">DATA PROOF-POINTS</div>
+          <div class="proof-grid">
+            
+        <div class="proof-card">
+          <div class="proof-stat">Index: 143</div>
+          <div class="proof-label">MC Parent eating index at 3 PM</div>
+          <div class="proof-note">The single largest eating index spike in the entire MC Parent day. A documented behavioral truth: school pickup triggers an immediate food moment.</div>
+        </div>
+        <div class="proof-card">
+          <div class="proof-stat">66–71</div>
+          <div class="proof-label">Denny's transaction index at 3–4 PM</div>
+          <div class="proof-note">Denny's runs 29–34pts BELOW category average during its highest MC Parent eating moment. The gap between audience appetite and Denny's capture is the opportunity.</div>
+        </div>
+        <div class="proof-card">
+          <div class="proof-stat">$81.8K – $95.3K</div>
+          <div class="proof-label">Weekday transaction volume at 3 PM</div>
+          <div class="proof-note">The lowest sustained volume window of any daypart — Denny's essentially cedes the after-school occasion to competitors by default.</div>
+        </div>
+        <div class="proof-card">
+          <div class="proof-stat">22.4% working density</div>
+          <div class="proof-label">MC Parents still at work at 3 PM</div>
+          <div class="proof-note">22.4% of MC Parents are still working at 3 PM — but this is rapidly declining, meaning parents are making the mental pivot to pickup / home mode right now.</div>
+        </div>
+          </div>
+        </div>
+
+        <!-- AUDIENCE SIGNALS -->
+        <div class="section-block">
+          <div class="section-label">AUDIENCE SIGNALS</div>
+          <ul class="audience-list">
+            <li>MC Parents: the 3 PM window is where the workday ends and the family day begins — decisions made here are made in motion (mobile-first, location-aware)</li><li>Zillennials: 6.98% eating density at 3 PM — lower than parents, but 7.34% socializing, indicating group snack moments are forming (campus, workspace breakrooms)</li><li>This is a pull occasion, not a push: parents are already in the car. The job is interception, not inspiration.</li>
+          </ul>
+        </div>
+
+        <!-- MEDIA WINDOWS -->
+        <div class="section-block">
+          <div class="section-label">MEDIA WINDOWS</div>
+          <table class="ch-table">
+            <thead>
+              <tr>
+                <th>Channel</th>
+                <th>Window</th>
+                <th>Rationale</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+        <tr>
+          <td class="ch-channel">Mobile / Location</td>
+          <td class="ch-timing">2:30 PM – 4:30 PM</td>
+          <td class="ch-rationale">Parents are in motion — mobile is the dominant screen. Geo-fence Denny's locations and school zones simultaneously.</td>
+        </tr>
+        <tr>
+          <td class="ch-channel">Social Stories / Reels</td>
+          <td class="ch-timing">2:00 PM – 4:00 PM</td>
+          <td class="ch-rationale">Quick-form video catches Zillennials on lunch-break or post-class social scroll before the snack moment arrives</td>
+        </tr>
+        <tr>
+          <td class="ch-channel">Radio / Streaming Audio</td>
+          <td class="ch-timing">3:00 PM – 5:00 PM</td>
+          <td class="ch-rationale">Parents in transit to pickup — audio is the only available channel when they're driving</td>
+        </tr>
+        <tr>
+          <td class="ch-channel">CTV</td>
+          <td class="ch-timing">Not recommended</td>
+          <td class="ch-rationale">Neither audience is home yet at 3–5 PM on weekdays</td>
+        </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- CREATIVE STARTERS -->
+        <div class="section-block">
+          <div class="section-label">CREATIVE THOUGHT-STARTERS</div>
+          <div class="creative-grid">
+            
+        <div class="creative-card">
+          <div class="creative-num">CONCEPT 01</div>
+          <div class="creative-territory">The After-School Détente</div>
+          <div class="creative-headline">"Everyone's hungry. No one agrees on what."</div>
+          <div class="creative-subhead">The one menu that wins every vote.</div>
+          <div class="creative-rationale">Addresses the universal parent-child post-school hunger standoff. Positions Denny's menu breadth as a family conflict-resolver — without being saccharine about it.</div>
+        </div>
+        <div class="creative-card">
+          <div class="creative-num">CONCEPT 02</div>
+          <div class="creative-territory">The Pickup Pivot</div>
+          <div class="creative-headline">"School's out. Dinner's not for hours. Let's fix that."</div>
+          <div class="creative-subhead">Denny's. Where the after-school pit stop actually fills you up.</div>
+          <div class="creative-rationale">Legitimizes the between-meal occasion — frames Denny's not as a restaurant but as a solution to a very specific, daily parental scheduling problem.</div>
+        </div>
+        <div class="creative-card">
+          <div class="creative-num">CONCEPT 03</div>
+          <div class="creative-territory">The Unstructured Hour</div>
+          <div class="creative-headline">"No homework yet. No bedtime yet. Just this."</div>
+          <div class="creative-subhead">Denny's. The hour before the evening starts.</div>
+          <div class="creative-rationale">Speaks to the cultural truth of after-school downtime — a fleeting, low-pressure window families actually enjoy. Emotionally warm without being cliché.</div>
+        </div>
+          </div>
+        </div>
+
+        <div class="occ-divider"></div>
+
+      </div>
+    </section>
+    <section class="occasion-section" id="dinner" style="background:#0a0a0a;">
+      <div class="occ-container">
+
+        <!-- HEADER -->
+        <div class="occ-header">
+          <div class="occ-meta">
+            <span class="occ-label">OCCASION 03</span>
+            <span class="occ-time">7 PM – 9 PM · Mon – Thu</span>
+          </div>
+          <h2 class="occ-title" style="color:#26C6DA;">Post-Work Dinner</h2>
+          <div class="occ-accent-bar" style="background:linear-gradient(90deg,#26C6DA,#FF6B35);"></div>
+        </div>
+
+        <!-- DATA PROOF -->
+        <div class="section-block">
+          <div class="section-label">DATA PROOF-POINTS</div>
+          <div class="proof-grid">
+            
+        <div class="proof-card">
+          <div class="proof-stat">13.15% eating density at 7 PM</div>
+          <div class="proof-label">Zillennial eating peak</div>
+          <div class="proof-note">7 PM is the Zillennial eating apex of the entire evening. It is the largest single dinner data point in their 24-hour cycle.</div>
+        </div>
+        <div class="proof-card">
+          <div class="proof-stat">12.6% eating density at 7 PM</div>
+          <div class="proof-label">MC Parent eating peak (post-work)</div>
+          <div class="proof-note">MC Parents mirror Zillennials — their dinner eating curve peaks at 7 PM, after work density drops below 7% at 6 PM (down from 13.2% at 5 PM).</div>
+        </div>
+        <div class="proof-card">
+          <div class="proof-stat">6.8% working density at 7 PM</div>
+          <div class="proof-label">MC Parent work drop-off</div>
+          <div class="proof-note">Work pressure drops 6.4pts in a single hour (13.2% → 6.8% from 5 PM to 7 PM). This is the clearest 'transition to leisure' signal in the data.</div>
+        </div>
+        <div class="proof-card">
+          <div class="proof-stat">$81K – $88K</div>
+          <div class="proof-label">Weekday dinner volume (7 PM, Tue–Thu)</div>
+          <div class="proof-note">Volume is soft relative to what audience eating curves suggest it should be — this is exactly the gap the Dinner Disconnect insight identified.</div>
+        </div>
+          </div>
+        </div>
+
+        <!-- AUDIENCE SIGNALS -->
+        <div class="section-block">
+          <div class="section-label">AUDIENCE SIGNALS</div>
+          <ul class="audience-list">
+            <li>The traditional 5 PM–7 PM dinner window is a mirage — both audiences are still working during this time (13–27% working density), meaning brands targeting 'family dinner at 5–6 PM' are messaging into the wrong moment</li><li>7 PM–9 PM is when both segments are genuinely available: work dropped, socializing building (10.4% for Zillennials), eating active</li><li>10.4% Zillennial socializing at 7 PM suggests group/couple dining — the occasion is social, not solitary; creative should reflect the company, not the food</li>
+          </ul>
+        </div>
+
+        <!-- MEDIA WINDOWS -->
+        <div class="section-block">
+          <div class="section-label">MEDIA WINDOWS</div>
+          <table class="ch-table">
+            <thead>
+              <tr>
+                <th>Channel</th>
+                <th>Window</th>
+                <th>Rationale</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+        <tr>
+          <td class="ch-channel">CTV / Streaming</td>
+          <td class="ch-timing">6:30 PM – 8:30 PM</td>
+          <td class="ch-rationale">Post-work lean-back mode begins at 6:30 PM as work curves collapse. First available high-quality video window of the day for both audiences.</td>
+        </tr>
+        <tr>
+          <td class="ch-channel">Social / Instagram</td>
+          <td class="ch-timing">6:00 PM – 8:00 PM</td>
+          <td class="ch-rationale">Zillennials shift from work-adjacent scrolling to social scrolling — feed ads in this window carry much higher relevance</td>
+        </tr>
+        <tr>
+          <td class="ch-channel">Search / Yelp</td>
+          <td class="ch-timing">6:30 PM – 7:30 PM</td>
+          <td class="ch-rationale">Pre-decision search window — 'dinner near me' intent peaks in the 30–60 min before the meal</td>
+        </tr>
+        <tr>
+          <td class="ch-channel">OOH</td>
+          <td class="ch-timing">5:30 PM – 7:00 PM</td>
+          <td class="ch-rationale">Evening commute home — in-transit audience is mentally available to dinner decisions in a way they weren't during morning commute</td>
+        </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- CREATIVE STARTERS -->
+        <div class="section-block">
+          <div class="section-label">CREATIVE THOUGHT-STARTERS</div>
+          <div class="creative-grid">
+            
+        <div class="creative-card">
+          <div class="creative-num">CONCEPT 01</div>
+          <div class="creative-territory">The Night Actually Starts Here</div>
+          <div class="creative-headline">"Work's done. You deserve a menu, not a meal kit."</div>
+          <div class="creative-subhead">Denny's. A proper dinner whenever you're actually free.</div>
+          <div class="creative-rationale">Directly reframes the Dinner Disconnect — tells the audience that Denny's, unlike competitors who serve the 5 PM family fiction, is waiting for you when you actually show up.</div>
+        </div>
+        <div class="creative-card">
+          <div class="creative-num">CONCEPT 02</div>
+          <div class="creative-territory">The Group Dinner That Needs No Occasion</div>
+          <div class="creative-headline">"Nobody planned this. That's the point."</div>
+          <div class="creative-subhead">Denny's. Always open for the dinner that wasn't supposed to happen.</div>
+          <div class="creative-rationale">Targets Zillennial social dining — the spontaneous, no-reservation, 7-people-all-with-different-orders dinner that Denny's booths were literally built for.</div>
+        </div>
+        <div class="creative-card">
+          <div class="creative-num">CONCEPT 03</div>
+          <div class="creative-territory">The Working Parent's Win</div>
+          <div class="creative-headline">"You made it through. Dinner's on us to figure out."</div>
+          <div class="creative-subhead">Denny's. Weeknight dinner without the weeknight effort.</div>
+          <div class="creative-rationale">Speaks directly to MC Parent exhaustion post-work. Removes the friction of deciding what to cook. Positions Denny's as the deserved exhale at the end of a long day.</div>
+        </div>
+          </div>
+        </div>
+
+        <div class="occ-divider"></div>
+
+      </div>
+    </section>
+    <section class="occasion-section" id="evening_social" style="background:#0f0f0f;">
+      <div class="occ-container">
+
+        <!-- HEADER -->
+        <div class="occ-header">
+          <div class="occ-meta">
+            <span class="occ-label">OCCASION 04</span>
+            <span class="occ-time">9 PM – 11 PM · Fri – Sat</span>
+          </div>
+          <h2 class="occ-title" style="color:#A855F7;">Evening Social</h2>
+          <div class="occ-accent-bar" style="background:linear-gradient(90deg,#A855F7,#FF6B35);"></div>
+        </div>
+
+        <!-- DATA PROOF -->
+        <div class="section-block">
+          <div class="section-label">DATA PROOF-POINTS</div>
+          <div class="proof-grid">
+            
+        <div class="proof-card">
+          <div class="proof-stat">10.12% → 7.93%</div>
+          <div class="proof-label">Zillennial socializing density (9–10 PM)</div>
+          <div class="proof-note">The tail of the Zillennial social peak. Socializing sustains high through 9 PM before transitioning toward wind-down — the food moment follows the social moment.</div>
+        </div>
+        <div class="proof-card">
+          <div class="proof-stat">11.07% socializing at 8 PM</div>
+          <div class="proof-label">Zillennial socializing apex</div>
+          <div class="proof-note">The absolute social peak of the Zillennial day — group activity is at its maximum between 8 PM and 9 PM. Food decisions in this window are socially driven.</div>
+        </div>
+        <div class="proof-card">
+          <div class="proof-stat">$95K – $117K</div>
+          <div class="proof-label">Friday/Saturday 9–10 PM volume</div>
+          <div class="proof-note">Friday and Saturday evening volume runs 35–55% above equivalent weekday slots — the weekend social amplifier is confirmed in the transaction data.</div>
+        </div>
+        <div class="proof-card">
+          <div class="proof-stat">26% sleeping density at 10 PM</div>
+          <div class="proof-label">Zillennial sleep onset</div>
+          <div class="proof-note">Sleep begins rising sharply at 10 PM — the window for social-driven food decisions closes fast. Creative must reach them before 10 PM, not after.</div>
+        </div>
+          </div>
+        </div>
+
+        <!-- AUDIENCE SIGNALS -->
+        <div class="section-block">
+          <div class="section-label">AUDIENCE SIGNALS</div>
+          <ul class="audience-list">
+            <li>This is entirely a Zillennial occasion — MC Parents' socializing drops to 9.4% at 9 PM while sleep rises to 14.2%; they are exiting the evening</li><li>Zillennials at 9 PM are post-peak social but still active — the transition from 'out with friends' to 'where are we eating' is happening in real time</li><li>The 8–9 PM socializing peak is followed by an eating signal that sustains into late night — food follows fun, not the other way around</li>
+          </ul>
+        </div>
+
+        <!-- MEDIA WINDOWS -->
+        <div class="section-block">
+          <div class="section-label">MEDIA WINDOWS</div>
+          <table class="ch-table">
+            <thead>
+              <tr>
+                <th>Channel</th>
+                <th>Window</th>
+                <th>Rationale</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+        <tr>
+          <td class="ch-channel">Social / TikTok / Instagram</td>
+          <td class="ch-timing">8:00 PM – 10:30 PM</td>
+          <td class="ch-rationale">Peak Zillennial screen-check during social events — phones out between social interactions; short-form video intercepts the decision</td>
+        </tr>
+        <tr>
+          <td class="ch-channel">Spotify / Streaming Audio</td>
+          <td class="ch-timing">8:00 PM – 11:00 PM</td>
+          <td class="ch-rationale">Evening background audio during pre-game, social events, rideshare — audio is non-interruptive and builds brand familiarity during active social hours</td>
+        </tr>
+        <tr>
+          <td class="ch-channel">DOOH / Rideshare Screens</td>
+          <td class="ch-timing">9:00 PM – 11:30 PM</td>
+          <td class="ch-rationale">In-transit moments between social stops — high receptivity when groups are deciding where to land next</td>
+        </tr>
+        <tr>
+          <td class="ch-channel">Search / Maps</td>
+          <td class="ch-timing">9:30 PM – 11:30 PM</td>
+          <td class="ch-rationale">Late-night 'food near me' search peaks post-event — Denny's must own this real estate, especially on weekends</td>
+        </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- CREATIVE STARTERS -->
+        <div class="section-block">
+          <div class="section-label">CREATIVE THOUGHT-STARTERS</div>
+          <div class="creative-grid">
+            
+        <div class="creative-card">
+          <div class="creative-num">CONCEPT 01</div>
+          <div class="creative-territory">The Night's Second Act</div>
+          <div class="creative-headline">"The bar was fine. This is better."</div>
+          <div class="creative-subhead">Denny's. Always open for the part of the night that matters.</div>
+          <div class="creative-rationale">Positions Denny's as the destination that completes the night — not a consolation prize but the actual reward. Tone: insider, not desperate.</div>
+        </div>
+        <div class="creative-card">
+          <div class="creative-num">CONCEPT 02</div>
+          <div class="creative-territory">The Group Decision That Takes No Effort</div>
+          <div class="creative-headline">"Four people. Zero arguments. One answer."</div>
+          <div class="creative-subhead">Denny's. The only place everyone can agree on.</div>
+          <div class="creative-rationale">Targets the universal Zillennial experience of group-decision-making paralysis. Denny's as the universally acceptable answer is both practical and subtly flattering.</div>
+        </div>
+        <div class="creative-card">
+          <div class="creative-num">CONCEPT 03</div>
+          <div class="creative-territory">The Unplanned Memory</div>
+          <div class="creative-headline">"This wasn't the plan. This is the story."</div>
+          <div class="creative-subhead">Denny's. The nights you didn't mean to stay up.</div>
+          <div class="creative-rationale">Leans into the nostalgia-forward Zillennial relationship with Denny's — the unexpected late-night run that becomes the night everyone remembers.</div>
+        </div>
+          </div>
+        </div>
+
+        <div class="occ-divider"></div>
+
+      </div>
+    </section>
+    <section class="occasion-section" id="latenight" style="background:#0a0a0a;">
+      <div class="occ-container">
+
+        <!-- HEADER -->
+        <div class="occ-header">
+          <div class="occ-meta">
+            <span class="occ-label">OCCASION 05</span>
+            <span class="occ-time">12 AM – 3 AM · Fri – Sat (peak) / Every night</span>
+          </div>
+          <h2 class="occ-title" style="color:#FF3C00;">Late Night</h2>
+          <div class="occ-accent-bar" style="background:linear-gradient(90deg,#FF3C00,#FFD600);"></div>
+        </div>
+
+        <!-- DATA PROOF -->
+        <div class="section-block">
+          <div class="section-label">DATA PROOF-POINTS</div>
+          <div class="proof-grid">
+            
+        <div class="proof-card">
+          <div class="proof-stat">14.31% of Denny's daily volume</div>
+          <div class="proof-label">12 AM – 5 AM share of daily transactions</div>
+          <div class="proof-note">Nearly 1-in-7 of all Denny's daily transactions happen between midnight and 5 AM — a structural overnight business, not a fringe occasion.</div>
+        </div>
+        <div class="proof-card">
+          <div class="proof-stat">53.83% sleeping</div>
+          <div class="proof-label">Zillennial sleep density at midnight</div>
+          <div class="proof-note">53.83% of Zillennials are asleep by midnight — meaning 46% are not. The late-night Denny's audience is the verified night owl minority, not an edge case.</div>
+        </div>
+        <div class="proof-card">
+          <div class="proof-stat">3.74% socializing</div>
+          <div class="proof-label">Zillennial overnight socializing</div>
+          <div class="proof-note">The minority who are still out after midnight are disproportionately social — they're the ones keeping the night alive, making food the next logical step.</div>
+        </div>
+        <div class="proof-card">
+          <div class="proof-stat">Index: 165</div>
+          <div class="proof-label">Late-night occasion index vs. category</div>
+          <div class="proof-note">Denny's runs 65pts above the QSR category average in the late-night occasion — this is not a contested space. Denny's owns overnight. The job is to own it louder.</div>
+        </div>
+          </div>
+        </div>
+
+        <!-- AUDIENCE SIGNALS -->
+        <div class="section-block">
+          <div class="section-label">AUDIENCE SIGNALS</div>
+          <ul class="audience-list">
+            <li>This is core Zillennial territory — parents have exited (57.2% sleeping at midnight vs. Zillennials' 53.83%); the late-night Denny's customer skews young by default</li><li>2.38% Zillennial working density at midnight — there's a subset still working night shifts, studying, or grinding; Denny's serves the night economy holistically</li><li>The Saturday-to-Sunday overnight bridge carries the highest volume of any transition — Sunday morning begins as Saturday night's overflow</li>
+          </ul>
+        </div>
+
+        <!-- MEDIA WINDOWS -->
+        <div class="section-block">
+          <div class="section-label">MEDIA WINDOWS</div>
+          <table class="ch-table">
+            <thead>
+              <tr>
+                <th>Channel</th>
+                <th>Window</th>
+                <th>Rationale</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+        <tr>
+          <td class="ch-channel">Social / TikTok</td>
+          <td class="ch-timing">11 PM – 2 AM</td>
+          <td class="ch-rationale">TikTok usage spikes post-midnight — this is documented Zillennial behavior. Short-form content that mirrors the unhinged energy of 2 AM earns organic amplification</td>
+        </tr>
+        <tr>
+          <td class="ch-channel">Gaming / Twitch</td>
+          <td class="ch-timing">10 PM – 3 AM</td>
+          <td class="ch-rationale">Late-night gaming audience has the highest Denny's affinity of any digital channel — Denny's Gaming Partnerships have documented precedent here</td>
+        </tr>
+        <tr>
+          <td class="ch-channel">Delivery App Push</td>
+          <td class="ch-timing">12 AM – 3 AM</td>
+          <td class="ch-rationale">DoorDash / Uber Eats push notifications at this hour have the highest conversion rate in the QSR category — late-night delivery is an impulse, not a planned decision</td>
+        </tr>
+        <tr>
+          <td class="ch-channel">Spotify / Late Night Playlist Targeting</td>
+          <td class="ch-timing">11 PM – 3 AM</td>
+          <td class="ch-rationale">Late-night music behavior — 'Late Night Drives,' 'Chill Vibes' playlist targeting reaches the social smokers, night walkers, and post-event crowd in transit</td>
+        </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- CREATIVE STARTERS -->
+        <div class="section-block">
+          <div class="section-label">CREATIVE THOUGHT-STARTERS</div>
+          <div class="creative-grid">
+            
+        <div class="creative-card">
+          <div class="creative-num">CONCEPT 01</div>
+          <div class="creative-territory">The Night Isn't Over (Campaign Extension)</div>
+          <div class="creative-headline">"Everybody else closed. We didn't."</div>
+          <div class="creative-subhead">Denny's. The night's last word.</div>
+          <div class="creative-rationale">A tonal continuation of the existing campaign — strips the sentiment away and leaves only the facts. At 2 AM, emotion is less useful than reassurance. We're here. Come in.</div>
+        </div>
+        <div class="creative-card">
+          <div class="creative-num">CONCEPT 02</div>
+          <div class="creative-territory">The 3 AM Charter</div>
+          <div class="creative-headline">"You don't need a reason to be here at 3 AM."</div>
+          <div class="creative-subhead">We've never asked for one.</div>
+          <div class="creative-rationale">Radical non-judgment as brand positioning. Late-night Denny's runs on discretion — whatever happened before you walked in, we don't need to know. Deeply culturally resonant for Zillennials who resist having to explain themselves.</div>
+        </div>
+        <div class="creative-card">
+          <div class="creative-num">CONCEPT 03</div>
+          <div class="creative-territory">The Night Economy</div>
+          <div class="creative-headline">"Night shift. Night shoot. Night out. Night over."</div>
+          <div class="creative-subhead">Denny's. Open for all of it.</div>
+          <div class="creative-rationale">Broadens the late-night audience beyond just social Zillennials to the full night economy — shift workers, creatives, service industry, students. Inclusive without being generic.</div>
+        </div>
+          </div>
+        </div>
+
+        <div class="occ-divider"></div>
+
+      </div>
+    </section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-note">Data sourced from transaction logs, Simmons MRI audience activity heatmaps, and QSR competitive transaction benchmarks. Creative starters are thought-provocations, not mandates.</p>
+  <div class="footer-badges">
+    <span class="footer-badge">The Community Agency</span>
+    <span class="footer-badge">Denny's</span>
+    <span class="footer-badge">Oct 2026</span>
+  </div>
+</footer>
+
+</body>
+</html>
